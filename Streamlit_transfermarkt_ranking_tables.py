@@ -8,9 +8,6 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 from PIL import Image
-import os
-
-os.chdir('C:\\Users\\fgo\\OneDrive - UEFA\\Python\\Streamlit\\Domestic rankings')
 
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36"}
 
