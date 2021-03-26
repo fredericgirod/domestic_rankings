@@ -3,7 +3,8 @@
 """
 
 import requests
-from bs4 import BeautifulSoup
+#from bs4 import BeautifulSoup
+import bs4
 import pandas as pd
 import numpy as np
 import streamlit as st
@@ -190,7 +191,7 @@ st.write('')
 res = requests.get(df_countries.iloc[index_country,0], headers=headers)
 
 if res.status_code == 200 and country != 'Liechtenstein' and country != 'San Marino':
-    soup = BeautifulSoup(res.content, 'html.parser')
+    soup = bs4.BeautifulSoup(res.content, 'html.parser')
     soup = soup.find("div",{"class":"responsive-table"})
     soup = soup.find("tbody")
     soup = soup.findAll("tr")
