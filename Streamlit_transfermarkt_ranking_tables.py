@@ -251,7 +251,7 @@ st.write('')
 
 
 # %% Webcrawler
-if country != 'Liechtenstein' and country != 'San Marino':
+if country not in ['Liechtenstein','San Marino']:
     res = requests.get(df_countries.iloc[index_country,0], headers=headers)
     
     if res.status_code == 200:
