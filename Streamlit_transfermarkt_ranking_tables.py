@@ -3,7 +3,7 @@
 """
 
 import requests
-from beautifulsoup4 import BeautifulSoup
+from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
 import streamlit as st
