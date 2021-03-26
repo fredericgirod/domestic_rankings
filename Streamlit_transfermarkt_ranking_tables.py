@@ -300,7 +300,7 @@ if country != 'Liechtenstein' and country != 'San Marino':
             results2.append(temp2)
 
         if season != datetime.datetime.now().year and results == results2: # it means that the user has input another season than the current one, but gets the same ranking as the current one, which is an issue
-            st.error('No ranking avaiable for this season')
+            st.error('No ranking available for this season')
         else:        
             df_table = pd.DataFrame(results,columns=["#","Club","Matches","W","D","L","Goals","+/-","Pts"])
             df_table.index = [""] * len(df_table) # hide index
