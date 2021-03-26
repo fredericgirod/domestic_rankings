@@ -1,5 +1,5 @@
 """
-@author: mks
+@author: fgo
 """
 
 import requests
