@@ -4,7 +4,7 @@
 
 import requests
 #from bs4 import BeautifulSoup
-import beautifulSoup as bs4
+import BeautifulSoup as bs4
 import pandas as pd
 import numpy as np
 import streamlit as st
