@@ -248,7 +248,6 @@ index_country = df_countries.index[df_countries['countries'] == country].tolist(
 
 st.write('')
 st.write('')
-st.write(df_countries.iloc[index_country,0])
 
 # %% Webcrawler
 if country not in ['Liechtenstein','San Marino']:
