@@ -271,12 +271,41 @@ if res.status_code == 200 and country != 'Liechtenstein' and country != 'San Mar
 
         results.append(temp)
 
-    df_table = pd.DataFrame(results,columns=["#","Club","Matches","W","D","L","Goals","+/-","Pts"])
-    df_table.index = [""] * len(df_table) # hide index
-    st.dataframe(df_table, height=2000)    
-    #st.table(df_table)
+    # Webcrawler of the current season (datetime.datetime.now().year)
+    if df_countries.iloc[index_country,2] == 0:
+        new_url = df_countries.iloc[index_country,0].replace(str(season-1),str(datetime.datetime.now().year-1))
+    else: # nordic league
+        new_url = df_countries.iloc[index_country,0].replace(str(season-2),str(datetime.datetime.now().year-2))
+
+    res2 = requests.get(new_url, headers=headers)
     
-    '##### Source: https://www.transfermarkt.com'                                    
+    soup2 = BeautifulSoup(res2.content, 'html.parser')
+    soup2 = soup2.find("div",{"class":"responsive-table"})
+    soup2 = soup2.find("tbody")
+    soup2 = soup2.findAll("tr")
+
+    results2 = []
+    for ele in soup2:
+        temp2 = []
+        ele = ele.findAll("td")
+
+        sr = ele[0].text.replace("\xa0","")
+        club = ele[2].text.replace("\xa0","").strip()
+        link = "https://www.transfermarkt.com" + ele[2].find("a")["href"]		
+
+        temp2 = [sr,club,ele[3].text,ele[4].text,ele[5].text,ele[6].text,ele[7].text,ele[8].text,ele[9].text]
+
+        results2.append(temp2)
+
+    if season != datetime.datetime.now().year and results == results2: # it means that the user has input another season than the current one, but gets the same ranking as the current one, which is an issue
+        st.error('No ranking avaiable for this season')
+    else:        
+        df_table = pd.DataFrame(results,columns=["#","Club","Matches","W","D","L","Goals","+/-","Pts"])
+        df_table.index = [""] * len(df_table) # hide index
+        st.dataframe(df_table, height=2000)    
+        #st.table(df_table)
+
+        '##### Source: https://www.transfermarkt.com'                                    
      
 else:                                    
     st.error('No ranking for this country')
