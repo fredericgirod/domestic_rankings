@@ -252,7 +252,10 @@ st.write(df_countries.iloc[index_country,0])
 
 # %% Webcrawler
 if country not in ['Liechtenstein','San Marino']:
-    res = requests.get(df_countries.iloc[index_country,0], headers=headers)
+    try:
+        res = requests.get(df_countries.iloc[index_country,0], headers=headers)
+    except ValueError:
+        st.error('No ranking for this country')
     
     if res.status_code == 200:
         soup = BeautifulSoup(res.content, 'html.parser')
